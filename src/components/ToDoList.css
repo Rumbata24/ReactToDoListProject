@@ -1,0 +1,116 @@
+main {
+  max-width: 1020px;
+  margin: 100px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+main h1 {
+  font-size: 5rem;
+  color: white;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.input-container input {
+  padding: 0rem 3rem;
+  background-color: none;
+  border: none;
+  border-radius: 10px 0px 0px 10px;
+  height: 47px;
+  outline: none;
+}
+
+::placeholder {
+  font-size: 1.6rem;
+}
+
+.add-task-btn {
+  padding: 1rem 3rem;
+  background-color: none;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white;
+  background-color: rgb(42, 160, 42);
+  border-radius: 10px;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.task {
+  
+}
+
+.task.done {
+    transition: all 0.3s ease;
+  position: relative;
+    color: #999;
+}
+
+.task.done:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: 2px;
+  top: 50%;
+  background-color: #333;
+}
+
+
+
+ul {
+}
+
+ul li {
+  background-color: white;
+  padding: 1.5rem;
+  list-style: none;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 1.8rem;
+}
+
+.btns button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btns .done-btn {
+  background-color: rgb(21, 165, 21);
+}
+
+.btns .remove-btn {
+  background-color: rgb(197, 52, 52);
+}
+
+.add-task-btn:hover,
+.btns .done-btn:hover {
+  background-color: rgb(12, 124, 12);
+}
+
+.btns .remove-btn:hover {
+    background-color: rgb(124, 21, 21);
+}
