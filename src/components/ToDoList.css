@@ -10,14 +10,24 @@ main {
 main h1 {
   font-size: 5rem;
   color: white;
+  margin-bottom: 3rem;
 }
 
 .input-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+
   width: 100%;
+}
+
+.input {
   margin-bottom: 3rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-container input {
@@ -26,6 +36,7 @@ main h1 {
   border: none;
   border-radius: 10px 0px 0px 10px;
   height: 47px;
+  width: 50%;
   outline: none;
 }
 
@@ -48,13 +59,12 @@ main h1 {
 }
 
 .task {
-  
 }
 
 .task.done {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
   position: relative;
-    color: #999;
+  color: #999;
 }
 
 .task.done:before {
@@ -67,9 +77,12 @@ main h1 {
   background-color: #333;
 }
 
-
-
 ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 ul li {
@@ -78,13 +91,20 @@ ul li {
   list-style: none;
   margin-bottom: 1rem;
   border-radius: 10px;
-  width: 100%;
+  width: 62%;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   font-size: 1.8rem;
+}
+
+.btns{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .btns button {
@@ -96,6 +116,9 @@ ul li {
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
+
+ margin-right: 0.5rem;
+  
 }
 
 .btns .done-btn {
@@ -112,5 +135,61 @@ ul li {
 }
 
 .btns .remove-btn:hover {
-    background-color: rgb(124, 21, 21);
+  background-color: rgb(124, 21, 21);
+}
+
+.btns .up-btn{
+  background-color: rgb(51, 51, 185);
+}
+
+.btns .down-btn{
+  background-color: rgb(127, 66, 184);
+}
+
+@media screen and (max-width: 670px) {
+  .group-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .btns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  ul li{
+    flex-direction: column;
+  }
+  .btns button{
+    width: 50%;
+    
+    margin-block: 0.5rem;
+  }
+
+  
+}
+
+@media screen and (max-width: 440px) {
+  
+  .btns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  ul li{
+    flex-direction: column;
+  }
+  .btns button{
+    width: 50%;
+    
+    margin-block: 0.5rem;
+  }
+
+  
 }

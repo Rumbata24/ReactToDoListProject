@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../components/ToDoList.css";
 
 const ToDoList = () => {
-  const [taskList, setTaskList] = useState([]);
+  // Load tasks form local storage on component mount
+  const storedTasks = localStorage.getItem("tasks");
+  const initialTaskList = storedTasks ? JSON.parse(storedTasks) : [];
+
+  const [taskList, setTaskList] = useState(initialTaskList);
   const [newTask, setNewTask] = useState("");
+
+  // Save tasks to local storage whenever taskList changes
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+  }, [taskList]);
 
   const addTask = () => {
     if (newTask.trim() === "") {
@@ -28,33 +38,83 @@ const ToDoList = () => {
     setTaskList((t) => t.filter((_, i) => i !== index));
   };
 
+  const moveTaskUp = (index) => {
+    if (index > 0) {
+      const updateTask = [...taskList];
+      [updateTask[index], updateTask[index - 1]] = [
+        updateTask[index - 1],
+        updateTask[index],
+      ];
+      setTaskList(updateTask);
+    }
+  };
+
+  const moveTaskDown = (index) => {
+    if (index < taskList.length - 1) {
+      const updateTask = [...taskList];
+      [updateTask[index], updateTask[index + 1]] = [
+        updateTask[index + 1],
+        updateTask[index],
+      ];
+      setTaskList(updateTask);
+    }
+  };
+
   return (
     <main>
       <h1>To Do List</h1>
       <div className="input-container">
-        <input
-          type="text"
-          value={newTask}
-          onChange={handleTaskChange}
-          placeholder="Enter a task..."
-        />
-        <button onClick={addTask} className="add-task-btn">
-          Add
-        </button>
+        <div className="input">
+          <input
+            type="text"
+            value={newTask}
+            onChange={handleTaskChange}
+            placeholder="Enter a task..."
+          />
+          <button onClick={addTask} className="add-task-btn">
+            Add
+          </button>
+        </div>
+
+        <ul>
+          {taskList.map((task, index) => (
+            <li key={index} className={`task ${task.done ? "done" : ""}`}>
+              {task.task}
+
+              <div className="btns">
+                <div className="group-btn">
+                  <button
+                    className="done-btn"
+                    onClick={() => toggleDone(index)}
+                  >
+                    {task.done ? 'undone' : 'done'}
+                  </button>
+
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeTask(index)}
+                  >
+                    remove
+                  </button>
+                </div>
+
+                <div className="group-btn">
+                  <button className="up-btn" onClick={() => moveTaskUp(index)}>
+                    Up
+                  </button>
+
+                  <button
+                    className="down-btn"
+                    onClick={() => moveTaskDown(index)}
+                  >
+                    Down
+                  </button>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-
-      <ul>
-        {taskList.map((task, index) => (
-          <li key={index} className={`task ${task.done ? "done" : ""}`}>
-            {task.task}
-
-            <div className="btns">
-              <button className="done-btn" onClick={() => toggleDone(index)}>done</button>{" "}
-              <button className="remove-btn" onClick={() => removeTask(index)}>remove</button>
-            </div>
-          </li>
-        ))}
-      </ul>
     </main>
   );
 };
